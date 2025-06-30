@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LOGO NOIRE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .modal-bg { background-color: rgba(0, 0, 0, 0.6); }
+    .animate-link { transition: transform 0.3s ease; }
+    .animate-link:hover { transform: scale(1.1); }
+    .dark-mode body { background-color: #1f2937; color: white; }
+    .dark-mode nav, .dark-mode footer, .dark-mode .form-box { background-color: #111827; }
+    .dark-mode input, .dark-mode textarea { background-color: #374151; color: white; border-color: #4b5563; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+<!-- Navbar -->
+    <div class="text-xl font-bold text-pink-600">NOIRE</div>
+  </div>
+  <div class="flex items-center space-x-4">
+    <a href="#home" class="text-gray-600 dark:text-gray-300 hover:text-pink-500 animate-link">Home</a>
+    <a href="produk.html" class="text-gray-600 dark:text-gray-300 hover:text-pink-500 animate-link">Produk</a>
+    <a href="#contact" class="text-gray-600 dark:text-gray-300 hover:text-pink-500 animate-link">Contact</a>
+    <button onclick="toggleDarkMode()" class="text-gray-600 dark:text-gray-300 hover:text-pink-500">🌓</button>
+    <div id="login-area"></div>
+  </div>
+</nav>
+
+<!-- Modal Login/Register -->
+<div id="auth-modal" class="hidden fixed inset-0 modal-bg flex items-center justify-center z-50">
+  <div class="bg-white dark:bg-gray-800 text-gray-900 dark:text-white p-6 rounded-lg shadow-lg w-full max-w-sm form-box">
+    <h2 class="text-xl font-bold text-pink-600 mb-4" id="modal-title">Login</h2>
+    <input type="text" id="auth-username" placeholder="Nama pengguna" class="w-full border px-3 py-2 mb-3 rounded" />
+    <input type="password" id="auth-password" placeholder="Kata sandi" class="w-full border px-3 py-2 mb-4 rounded" />
+    <div class="flex justify-between">
+      <button onclick="closeAuthForm()" class="bg-gray-300 px-4 py-2 rounded">Batal</button>
+      <button id="auth-action-btn" onclick="login()" class="bg-pink-600 text-white px-4 py-2 rounded">Login</button>
+    </div>
+    <p class="text-sm mt-4 text-center">
+      Belum punya akun? <button onclick="toggleAuthMode()" class="text-pink-600 hover:underline" id="toggle-auth-mode">Daftar di sini</button>
+    </p>
+  </div>
+</div>
+
+<!-- Home Section -->
+<section id="home" class="text-center mt-24 p-4">
+  <h1 class="text-4xl font-bold mt-2 text-pink-600">NOIRE</h1>
+  <p class="text-lg text-gray-700 mt-1 italic dark:text-gray-300">Elegance in Every Thread</p>
+  <p class="text-gray-600 mt-2 max-w-xl mx-auto dark:text-gray-400">
+    Temukan koleksi fashion pilihan dari Noire – mulai dari streetwear sampai minimalis modern. Kami hadir untukmu yang ingin tampil stylish setiap hari.
+  </p>
+</section>
+
+<script>
+function toggleDarkMode() {
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('darkMode', document.documentElement.classList.contains('dark'));
+}
+if (localStorage.getItem('darkMode') === 'true') {
+  document.documentElement.classList.add('dark');
+}
+function showLoginForm() {
+  document.getElementById('auth-modal').classList.remove('hidden');
+  document.getElementById('modal-title').innerText = 'Login';
+  document.getElementById('auth-action-btn').innerText = 'Login';
+  document.getElementById('auth-action-btn').onclick = login;
+}
+function toggleAuthMode() {
+  const title = document.getElementById('modal-title');
+  const actionBtn = document.getElementById('auth-action-btn');
+  if (title.innerText === 'Login') {
+    title.innerText = 'Daftar';
+    actionBtn.innerText = 'Daftar';
+    actionBtn.onclick = register;
+  } else {
+    title.innerText = 'Login';
+    actionBtn.innerText = 'Login';
+    actionBtn.onclick = login;
+  }
+}
+function closeAuthForm() {
+  document.getElementById('auth-modal').classList.add('hidden');
+}
+function register() {
+  const username = document.getElementById('auth-username').value;
+  const password = document.getElementById('auth-password').value;
+  if (username && password) {
+    localStorage.setItem(`user_${username}`, password);
+    alert('Pendaftaran berhasil, silakan login!');
+    toggleAuthMode();
+  } else {
+    alert('Isi semua field!');
+  }
+}
+function login() {
+  const username = document.getElementById('auth-username').value;
+  const password = document.getElementById('auth-password').value;
+  const stored = localStorage.getItem(`user_${username}`);
+  if (stored && stored === password) {
+    localStorage.setItem('loggedUser', username);
+    updateLoginArea();
+    closeAuthForm();
+  } else {
+    alert('Username atau password salah!');
+  }
+}
+function logout() {
+  if (confirm('Yakin ingin keluar?')) {
+    localStorage.removeItem('loggedUser');
+    updateLoginArea();
+  }
+}
+function updateLoginArea() {
+  const user = localStorage.getItem('loggedUser');
+  const area = document.getElementById('login-area');
+  if (user) {
+    area.innerHTML = `<span class='text-sm text-gray-600 dark:text-gray-300'>Hi, ${user}</span> <button onclick='logout()' class='text-pink-600 hover:underline ml-2'>Logout</button>`;
+  } else {
+    area.innerHTML = `<button onclick='showLoginForm()' class='text-gray-600 dark:text-gray-300 hover:text-pink-500 animate-link'>Login</button>`;
+  }
+}
+updateLoginArea();
+</script>
+
+</body>
+</html>

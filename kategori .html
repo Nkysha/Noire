@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Noire</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .animate-move { animation: move 3s infinite alternate; }
+    @keyframes move { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+    .animate-cart { animation: animateCart 0.5s ease-in-out; }
+    @keyframes animateCart { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+    .notif { animation: showNotif 2s ease-in-out; }
+    @keyframes showNotif { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+    button:hover { transform: scale(1.1); transition: transform 0.2s ease; }
+    .animate-link { transition: transform 0.3s ease; }
+    .animate-link:hover { transform: scale(1.1); }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+<!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex justify-between items-center fixed w-full z-10 top-0 left-0">
+    <div class="text-xl font-bold text-pink-600">NOIRE</div>
+    <div class="flex items-center space-x-4">
+      <a href="#home" class="text-pink-600 font-semibold animate-link" onclick="playClick()">Home</a>
+      <a href="#kategori" class="text-gray-600 hover:text-pink-500 animate-link" onclick="playClick()">Kategori</a>
+      <a href="#contact" class="text-gray-600 hover:text-pink-500 animate-link" onclick="playClick()">Contact</a>
+      <a href="#about" class="text-gray-600 hover:text-pink-500 animate-link" onclick="playClick()">About Me</a>
+      <div class="relative">
+        <button class="text-gray-600 hover:text-pink-500 animate-cart" onclick="playClick(); goToKeranjang()">🛒</button>
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full px-2">0</span>
+      </div>
+      <div id="login-area">
+        <!-- This will update after login -->
+        <button onclick="playClick(); showLoginForm()" class="text-gray-600 hover:text-pink-500 animate-link">Login</button>
+      </div>
+    </div>
+  </nav>
+<!-- Kategori -->
+  <section id="kategori" class="max-w-6xl mx-auto px-4 mt-20">
+    <h2 class="text-2xl font-semibold mb-6 text-center">Kategori Produk</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://www.russ.co.id/cdn/shop/files/ginee_20230813023530557_6551895950_1024x.png?v=1739795427"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Jaket bomber</h3>
+        <p class="text-sm text-gray-600">Rp100.000</p>
+        <button onclick="playClick(); addToCart('Kaos Polos', 50000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/9/1/fdd23efc-6727-4fdf-a852-08f796454988.jpg"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Jaket varsity</h3>
+        <p class="text-sm text-gray-600">Rp100.000</p>
+        <button onclick="playClick(); addToCart('Kaos Polos', 50000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://www.russ.co.id/cdn/shop/files/ginee_20230813023530557_6551895950_1024x.png?v=1739795427"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Jaket bomber</h3>
+        <p class="text-sm text-gray-600">Rp100.000</p>
+        <button onclick="playClick(); addToCart('Kaos Polos', 50000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://www.russ.co.id/cdn/shop/files/ginee_20230813023530557_6551895950_1024x.png?v=1739795427"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Jaket bomber</h3>
+        <p class="text-sm text-gray-600">Rp100.000</p>
+        <button onclick="playClick(); addToCart('Kaos Polos', 50000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://www.russ.co.id/cdn/shop/files/ginee_20230813023530557_6551895950_1024x.png?v=1739795427"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Jaket bomber</h3>
+        <p class="text-sm text-gray-600">Rp100.000</p>
+        <button onclick="playClick(); addToCart('Kaos Polos', 50000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://www.russ.co.id/cdn/shop/files/ginee_20230813023530557_6551895950_1024x.png?v=1739795427"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Jaket bomber</h3>
+        <p class="text-sm text-gray-600">Rp100.000</p>
+        <button onclick="playClick(); addToCart('Kaos Polos', 50000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+
+         </div>
+  </section>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Noire</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .animate-move { animation: move 3s infinite alternate; }
+    @keyframes move { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+    .animate-cart { animation: animateCart 0.5s ease-in-out; }
+    @keyframes animateCart { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+    .notif { animation: showNotif 2s ease-in-out; }
+    @keyframes showNotif { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+    button:hover { transform: scale(1.1); transition: transform 0.2s ease; }
+    .animate-link { transition: transform 0.3s ease; }
+    .animate-link:hover { transform: scale(1.1); }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+  <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex justify-between items-center fixed w-full z-10 top-0 left-0">
+    <div class="text-xl font-bold text-pink-600">NOIRE</div>
+    <div class="flex items-center space-x-4">
+      <a href="nav .html" class="text-gray-600 hover:text-pink-500 animate-link"playClick()">Home</a>
+      <a href="produk .html" class="text-gray-600 hover:text-pink-500 animate-link" onclick="playClick()">Produk</a>
+      <a href="kontak .html" class="text-gray-600 hover:text-pink-500 animate-link" onclick="playClick()">Contact</a>
+           <div class="relative">
+        <button class="text-gray-600 hover:text-pink-500 animate-cart" onclick="playClick(); goToKeranjang()">🛒</button>
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full px-2">0</span>
+      </div>
+      <div id="login-area">
+        <!-- This will update after login -->
+        <button onclick="playClick(); showLoginForm()" class="text-gray-600 hover:text-pink-500 animate-link">Login</button>
+      </div>
+    </div>
+  </nav>
+<a href="produk%20.html" onclick="navigate('produk')" class="mt-6 inline-block bg-pink-600 text-white px-6 py-3 rounded-full hover:bg-pink-700 transition transform hover:scale-105">
+                  </a></div></section>
+<!-- Login/Register Popup -->
+  <div id="auth-popup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded shadow max-w-sm w-full">
+      <!-- Login Form -->
+      <form id="login-form" class="space-y-4">
+        <h3 class="text-lg font-bold mb-4">Login</h3>
+        <input type="text" id="login-username" placeholder="Username" class="w-full px-3 py-2 border rounded" required />
+        <input type="password" id="login-password" placeholder="Password" class="w-full px-3 py-2 border rounded" required />
+        <button type="submit" class="bg-pink-500 text-white px-4 py-2 rounded w-full hover:bg-pink-600">Login</button>
+        <p class="text-center mt-2 text-sm">
+          Belum punya akun? 
+          <button type="button" onclick="toggleAuthForm()" class="text-pink-500 underline">Daftar di sini</button>
+        </p>
+      </form>
+<!-- Register Form -->
+      <form id="register-form" class="space-y-4 hidden">
+        <h3 class="text-lg font-bold mb-4">Daftar</h3>
+        <input type="text" id="register-username" placeholder="Username" class="w-full px-3 py-2 border rounded" required />
+        <input type="password" id="register-password" placeholder="Password" class="w-full px-3 py-2 border rounded" required />
+        <input type="password" id="register-password2" placeholder="Konfirmasi Password" class="w-full px-3 py-2 border rounded" required />
+        <button type="submit" class="bg-pink-500 text-white px-4 py-2 rounded w-full hover:bg-pink-600">Daftar</button>
+        <p class="text-center mt-2 text-sm">
+          Sudah punya akun? 
+          <button type="button" onclick="toggleAuthForm()" class="text-pink-500 underline">Login di sini</button>
+        </p>
+      </form>
+
+      <button onclick="playClick(); closeAuthPopup()" class="mt-4 text-sm text-gray-600 hover:underline w-full">Batal</button>
+    </div>
+  </div>
+
+
+
+
+<!-- Produk -->
+  <section id="kategori" class="max-w-6xl mx-auto px-4 mt-20">
+    <h2 class="text-2xl font-semibold mb-6 text-center">Produk</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://www.loewe.com/dw/image/v2/BBPC_PRD/on/demandware.static/-/Sites-Loewe_master/default/dw426c9d91/images_rd/H526Y02WA6/H526Y02WA6-5110/H526Y02WA6_5110_1F.jpg?sw=850&q=100"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Jacket in cotton blue</h3>
+        <p class="text-sm text-gray-600">Rp399.000</p>
+        <button onclick="playClick(); addToCart('Jacket in cotton blue', 399000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://hrd-live.cdn.scayle.cloud/images/97cefbf5a841c9c38af15e6cc1dfca32.jpg?quality=75"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Fleece Hybrid Jacket</h3>
+        <p class="text-sm text-gray-600">Rp399.000</p>
+        <button onclick="playClick(); addToCart('Fleece Hybrid Jacket', 399000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://store.50910.jp/upload/save_image/07281903_597b0beb59adc.jpg"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Air wool Pullover</h3>
+        <p class="text-sm text-gray-600">Rp399.000</p>
+        <button onclick="playClick(); addToCart('Air wool Pullover', 399000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://i.pinimg.com/736x/7b/24/3d/7b243dfd41f5bf5e23a40658c7015f67.jpg"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Solamor Jacket</h3>
+        <p class="text-sm text-gray-600">Rp399.000</p>
+        <button onclick="playClick(); addToCart('Solamor Jacket', 399000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://preview.redd.it/does-anyone-know-of-a-pattern-similar-to-this-v0-ojovw9cj0yzb1.png?width=640&crop=smart&auto=webp&s=a23290ac5ec6f018980ac0e5720dc3a23e1d9893"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Detroit Jacket</h3>
+        <p class="text-sm text-gray-600">Rp399.000</p>
+        <button onclick="playClick(); addToCart('Detroit Jacket', 399000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<div class="bg-white p-4 shadow rounded">
+        <img
+          src="https://m.media-amazon.com/images/I/71vSNcgE6xL._AC_UY1000_.jpg"
+          alt="Produk 1"
+          class="mb-2 w-full rounded animate-move"
+        />
+        <h3 class="font-bold text-lg">Denim Jacket</h3>
+        <p class="text-sm text-gray-600">Rp399.000</p>
+        <button onclick="playClick(); addToCart('Denim Jacket', 399000)" class="mt-2 bg-pink-500 text-white px-4 py-1 rounded hover:bg-pink-600">
+          Beli
+        </button>
+      </div>
+<!-- Keranjang -->
+  <section id="keranjang" class="max-w-6xl mx-auto px-4 mt-20">
+    <h2 class="text-2xl font-semibold mb-6 text-center">Keranjang Belanja</h2>
+    <ul id="cart-items" class="space-y-4"></ul>
+    <p class="mt-6 text-right font-semibold">Total: <span id="cart-total">Rp0</span></p>
+    <div class="text-right mt-4">
+      <button onclick="playClick(); checkoutCart()" class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600">Checkout</button>
+ <div class="relative">
+
+ <!-- Script -->
+  <script>
+    const clickSound = document.getElementById("clickSound");
+    const authPopup = document.getElementById("auth-popup");
+    const loginForm = document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+    const loginArea = document.getElementById("login-area");
+    const cartItemsList = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let users = JSON.parse(localStorage.getItem("users")) || {}; // username: password
+    let loggedUser = localStorage.getItem("noireUser");
+
+    function playClick() {
+      if (clickSound) {
+        clickSound.play().catch(() => {});
+      }
+    }
+
+    // Show login form, hide register
+    function showLoginForm() {
+      authPopup.classList.remove("hidden");
+      loginForm.classList.remove("hidden");
+      registerForm.classList.add("hidden");
+    }
+
+    // Show register form, hide login
+    function showRegisterForm() {
+      authPopup.classList.remove("hidden");
+      registerForm.classList.remove("hidden");
+      loginForm.classList.add("hidden");
+    }
+
+    // Toggle between login/register form
+    function toggleAuthForm() {
+      if (loginForm.classList.contains("hidden")) {
+        showLoginForm();
+      } else {
+        showRegisterForm();
+      }
+    }
+
+    // Close popup
+    function closeAuthPopup() {
+      authPopup.classList.add("hidden");
+      clearAuthInputs();
+    }
+
+    // Clear inputs
+    function clearAuthInputs() {
+      loginForm.reset();
+      registerForm.reset();
+    }
+
+    // Update login area display
+    function updateLoginArea() {
+      if (loggedUser) {
+        loginArea.innerHTML = `
+          <span class="text-gray-600">Hi, ${loggedUser}</span> 
+          <button onclick="logoutUser()" class="ml-2 text-pink-600 hover:underline">Logout</button>
+        `;
+      } else {
+        loginArea.innerHTML = `<button onclick="playClick(); showLoginForm()" class="text-gray-600 hover:text-pink-500 animate-link">Login</button>`;
+      }
+    }
+
+    // Login submit
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const username = document.getElementById("login-username").value.trim();
+      const password = document.getElementById("login-password").value;
+      if (users[username] && users[username] === password) {
+        loggedUser = username;
+        localStorage.setItem("noireUser", username);
+        alert("Login berhasil!");
+        updateLoginArea();
+        closeAuthPopup();
+      } else {
+        alert("Username atau password salah.");
+      }
+    });
+
+    // Register submit
+    registerForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const username = document.getElementById("register-username").value.trim();
+      const pass1 = document.getElementById("register-password").value;
+      const pass2 = document.getElementById("register-password2").value;
+      if (pass1 !== pass2) {
+        alert("Password dan konfirmasi password tidak sama.");
+        return;
+      }
+      if (users[username]) {
+        alert("Username sudah terdaftar.");
+        return;
+      }
+      users[username] = pass1;
+      localStorage.setItem("users", JSON.stringify(users));
+      alert("Pendaftaran berhasil! Silakan login.");
+      showLoginForm();
+    });
+
+    function logoutUser() {
+      loggedUser = null;
+      localStorage.removeItem("noireUser");
+      updateLoginArea();
+      alert("Anda telah logout.");
+    }
+
+    // Cart functions
+    document.getElementById("cart-count").innerText = cart.length;
+
+    function addToCart(productName, price) {
+      if (!loggedUser) {
+        alert("Silakan login terlebih dahulu untuk membeli produk.");
+        showLoginForm();
+        return;
+      }
+      cart.push({ name: productName, price: price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("cart-count").innerText = cart.length;
+
+      const notif = document.createElement("div");
+      notif.classList.add(
+        "notif",
+        "bg-green-500",
+        "text-white",
+        "p-4",
+        "fixed",
+        "bottom-10",
+        "left-10",
+        "rounded"
+      );
+      notif.innerText = `${productName} berhasil ditambahkan ke keranjang!`;
+      document.body.appendChild(notif);
+      setTimeout(() => notif.remove(), 3000);
+    }
+
+    function goToKeranjang() {
+      if (cart.length === 0) {
+        alert("Keranjang Anda kosong!");
+      } else {
+        document.getElementById("keranjang").scrollIntoView({ behavior: "smooth" });
+        renderCart();
+      }
+    }
+
+    function renderCart() {
+      cartItemsList.innerHTML = "";
+      let total = 0;
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = "flex justify-between items-center border-b pb-2";
+        li.innerHTML = `<span>${item.name} - Rp${item.price.toLocaleString()}</span>
+                        <button onclick="playClick(); removeFromCart(${index})" class="text-red-500 hover:underline">Hapus</button>`;
+        cartItemsList.appendChild(li);
+        total += item.price;
+      });
+      if (cart.length > 0) total; // Ongkos kirim
+      cartTotal.innerText = `Rp${total.toLocaleString()}`;
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("cart-count").innerText = cart.length;
+      renderCart();
+    }
+
+    function checkoutCart() {
+      if (!loggedUser) {
+        alert("Silakan login terlebih dahulu untuk checkout.");
+        showLoginForm();
+        return;
+      }
+      if (cart.length === 0) {
+        alert("Keranjang kosong, tidak bisa checkout.");
+        return;
+      }
+      alert(`Terima kasih, ${loggedUser}! Pesanan Anda sudah diproses.`);
+      cart = [];
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("cart-count").innerText = 0;
+      renderCart();
+    }
+
+    // Init
+    updateLoginArea();
+    renderCart();
+  </script>
+</body>
+</html>
+
+
+        
+

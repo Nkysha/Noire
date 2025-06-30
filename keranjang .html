@@ -1,0 +1,92 @@
+<!-- Keranjang -->
+  <section id="keranjang" class="max-w-6xl mx-auto px-4 mt-20">
+    <h2 class="text-2xl font-semibold mb-6 text-center">Keranjang Belanja</h2>
+    <ul id="cart-items" class="space-y-4"></ul>
+    <p class="mt-6 text-right font-semibold">Total: <span id="cart-total">Rp0</span></p>
+    <div class="text-right mt-4">
+      <button onclick="playClick(); checkoutCart()" class="bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600">Checkout</button>
+ <div class="relative">
+            </div>
+  </section>
+ // Cart functions
+    document.getElementById("cart-count").innerText = cart.length;
+
+    function addToCart(productName, price) {
+      if (!loggedUser) {
+        alert("Silakan login terlebih dahulu untuk membeli produk.");
+        showLoginForm();
+        return;
+      }
+      cart.push({ name: productName, price: price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("cart-count").innerText = cart.length;
+
+      const notif = document.createElement("div");
+      notif.classList.add(
+        "notif",
+        "bg-green-500",
+        "text-white",
+        "p-4",
+        "fixed",
+        "bottom-10",
+        "left-10",
+        "rounded"
+      );
+      notif.innerText = `${productName} berhasil ditambahkan ke keranjang!`;
+      document.body.appendChild(notif);
+      setTimeout(() => notif.remove(), 3000);
+    }
+
+    function goToKeranjang() {
+      if (cart.length === 0) {
+        alert("Keranjang Anda kosong!");
+      } else {
+        document.getElementById("keranjang").scrollIntoView({ behavior: "smooth" });
+        renderCart();
+      }
+    }
+
+    function renderCart() {
+      cartItemsList.innerHTML = "";
+      let total = 0;
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.className = "flex justify-between items-center border-b pb-2";
+        li.innerHTML = `<span>${item.name} - Rp${item.price.toLocaleString()}</span>
+                        <button onclick="playClick(); removeFromCart(${index})" class="text-red-500 hover:underline">Hapus</button>`;
+        cartItemsList.appendChild(li);
+        total += item.price;
+      });
+      if (cart.length > 0) total; // Ongkos kirim
+      cartTotal.innerText = `Rp${total.toLocaleString()}`;
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("cart-count").innerText = cart.length;
+      renderCart();
+    }
+function checkoutCart() {
+      if (!loggedUser) {
+        alert("Silakan login terlebih dahulu untuk checkout.");
+        showLoginForm();
+        return;
+      }
+      if (cart.length === 0) {
+        alert("Keranjang kosong, tidak bisa checkout.");
+        return;
+      }
+      alert(`Terima kasih, ${loggedUser}! Pesanan Anda sudah diproses.`);
+      cart = [];
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("cart-count").innerText = 0;
+      renderCart();
+    }
+
+    // Init
+    updateLoginArea();
+    renderCart();
+  </script>
+</body>
+</html>
